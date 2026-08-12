@@ -7,7 +7,7 @@
   <meta name="author" content="William Silva">
   <title>William Silva | Portfólio de Tecnologia</title>
 
-  <style>
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=KqdBqD8VbzDMWFhiVl44R2dqSNEQipA-60bLa6GljNEP89SIuVwz2QbQXtbPfuFuu6GWchSQpvAUL3u2DQrkN0ckhnV_vRUI3rgnZFAFMN8Je4U3l3NppBebqpxZQYasfJzOYaDmlB7rwSzk9XiotOFBB2H_AI0quazti0lcDCiuYaYNFqfPjjonxLLKrPnGDo9eTkkbb9xmFMneTd8JlxrAyK7LOcsvxRkvA1vxSzUXf7IZvizqVdpGUUicMzsLOlc0R7hAujGOxkAFVmbzxcu6SyiyRxqt-rqOWJpZAZiyk_WbIlhmutj4zB4in3nDhKhi7MRwx56_tmNSs5-ahw" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9jaGF0Z3B0LmNvbS9iYWNrZW5kLWFwaS9lc3R1YXJ5L2NvbnRlbnQ_aWQ9ZmlsZV8wMDAwMDAwMGJjZDQ4MjBlOGZkMTU3ODMyYTEyNDg3NiZmbj1pbmRleF9wb3J0Zm9saW9fYWp1c3RhZG8uaHRtbCZjZD1hdHRhY2htZW50JnRzPTQ5NjI2NSZwPWZzJmNpZD0xJnNpZz05Y2RkYWM0MTUwMDYyYTFjOGQ4ZTE5MDhiZTcwOWE1YTZjOGNkNjk1NDdjZDA3MDY4ZDYyYzE5MjVlYmZjNjdmJnY9MA"/><style>
     :root {
       --bg: #0b1120;
       --bg-soft: #111827;
@@ -186,17 +186,17 @@
       text-align: center;
     }
 
-    .profile-icon {
-      width: 130px;
-      height: 130px;
+    /* FOTO DO PERFIL */
+    .profile-card > img {
+      width: 120px;
+      height: 120px;
       margin: 0 auto 20px;
+      display: block;
+      object-fit: cover;
+      object-position: center;
       border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-size: 3rem;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: #07111d;
-      font-weight: 900;
+      border: 3px solid var(--primary);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.30);
     }
 
     .profile-card h2 {
@@ -478,8 +478,8 @@
         </div>
 
         <div class="profile-card">
-          <div class="profile-icon">WS</div>
-          <h2>Professor William Silva</h2>
+          <img src="img/william.jpeg" alt="William Silva">
+          <h2>Prof William Silva</h2>
           <p>
             Redes • Cibersegurança • IoT • Automação •
             Desenvolvimento • Dados • Educação Tecnológica
@@ -757,8 +757,8 @@
 
           <div class="social">
             <!-- ALTERE OS LINKS ABAIXO -->
-            <a href="#" target="https://www.linkedin.com/in/williambelarmino/">LinkedIn</a>
-            <a href="profwilliam.silva.senai@gmail.com">E-mail</a>
+            <a href="https://www.linkedin.com/in/williambelarmino/" target="_blank">LinkedIn</a>
+            <a href="mailto:profwilliam.silva.senai@gmail.com">E-mail</a>
           </div>
         </div>
 
