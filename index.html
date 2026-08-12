@@ -1,0 +1,786 @@
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfólio profissional de William Silva — Tecnologia, Redes, Cibersegurança, IoT, Automação e Educação Tecnológica.">
+  <meta name="author" content="William Silva">
+  <title>William Silva | Portfólio de Tecnologia</title>
+
+  <style>
+    :root {
+      --bg: #0b1120;
+      --bg-soft: #111827;
+      --card: #172033;
+      --card-hover: #1d2940;
+      --text: #f8fafc;
+      --muted: #aab6c8;
+      --primary: #38bdf8;
+      --secondary: #818cf8;
+      --accent: #22c55e;
+      --border: rgba(255,255,255,.09);
+      --shadow: 0 18px 45px rgba(0,0,0,.22);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(56,189,248,.13), transparent 30%),
+        radial-gradient(circle at 85% 20%, rgba(129,140,248,.12), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: auto;
+    }
+
+    /* NAVBAR */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(11,17,32,.86);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: .95rem;
+      transition: .25s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 720px;
+      display: grid;
+      place-items: center;
+      padding: 90px 0;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid rgba(56,189,248,.35);
+      border-radius: 999px;
+      color: var(--primary);
+      background: rgba(56,189,248,.07);
+      font-size: .85rem;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 6vw, 5.2rem);
+      line-height: 1.02;
+      margin-bottom: 22px;
+    }
+
+    h1 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.12rem;
+      max-width: 690px;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-weight: 700;
+      transition: .25s;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #07111d;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+    }
+
+    .btn-outline {
+      color: var(--text);
+      background: rgba(255,255,255,.03);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .profile-card {
+      padding: 30px;
+      border: 1px solid var(--border);
+      background: linear-gradient(145deg, rgba(23,32,51,.95), rgba(17,24,39,.9));
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .profile-icon {
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 3rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #07111d;
+      font-weight: 900;
+    }
+
+    .profile-card h2 {
+      margin-bottom: 5px;
+    }
+
+    .profile-card p {
+      margin: 0;
+      font-size: .95rem;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 85px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-title h2 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+    }
+
+    /* ABOUT */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 35px;
+    }
+
+    .about-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 30px;
+    }
+
+    .about-card h3 {
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+
+    .about-card p {
+      color: var(--muted);
+    }
+
+    /* AREAS */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px;
+      transition: .25s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      background: var(--card-hover);
+      border-color: rgba(56,189,248,.3);
+    }
+
+    .icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .card h3 {
+      margin-bottom: 9px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    /* PROJECTS */
+    .project-card {
+      position: relative;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(56,189,248,.1);
+      color: var(--primary);
+      font-size: .75rem;
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* TIMELINE */
+    .timeline {
+      max-width: 850px;
+      margin: auto;
+      border-left: 2px solid rgba(56,189,248,.3);
+      padding-left: 30px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 32px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--primary);
+      left: -38px;
+      top: 7px;
+      box-shadow: 0 0 0 5px rgba(56,189,248,.08);
+    }
+
+    .timeline-item span {
+      color: var(--primary);
+      font-size: .85rem;
+      font-weight: 700;
+    }
+
+    .timeline-item h3 {
+      margin: 4px 0;
+    }
+
+    .timeline-item p {
+      color: var(--muted);
+    }
+
+    /* CONTACT */
+    .contact-box {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+      background: linear-gradient(145deg, var(--card), #111827);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 45px 30px;
+    }
+
+    .contact-box p {
+      color: var(--muted);
+      margin: 12px auto 25px;
+      max-width: 600px;
+    }
+
+    .social {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .social a {
+      padding: 10px 15px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      color: var(--muted);
+    }
+
+    .social a:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 850px) {
+      .hero-content,
+      .about {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-card {
+        max-width: 450px;
+        margin: auto;
+      }
+
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero {
+        min-height: auto;
+        padding: 70px 0;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 65px 0;
+      }
+
+      h1 {
+        font-size: 2.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- MENU -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#inicio" class="logo">PROF <span>WILLIAM SILVA</span></a>
+
+        <ul class="nav-links">
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#areas">Áreas</a></li>
+          <li><a href="#projetos">Projetos</a></li>
+          <li><a href="#trajetoria">Trajetória</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- INÍCIO -->
+  <main id="inicio">
+    <section class="hero">
+      <div class="container hero-content">
+
+        <div>
+          <span class="badge">TECNOLOGIA • EDUCAÇÃO • INOVAÇÃO</span>
+
+          <h1>
+            William<br>
+            <span>Silva</span>
+          </h1>
+
+          <p>
+            Professor e profissional de Tecnologia da Informação,
+            apaixonado por transformar conhecimento técnico em
+            projetos práticos, experiências de aprendizagem e
+            soluções tecnológicas.
+          </p>
+
+          <div class="buttons">
+            <a href="#projetos" class="btn btn-primary">Conheça meus projetos</a>
+            <a href="#contato" class="btn btn-outline">Entrar em contato</a>
+          </div>
+        </div>
+
+        <div class="profile-card">
+          <div class="profile-icon">WS</div>
+          <h2>Professor William Silva</h2>
+          <p>
+            Redes • Cibersegurança • IoT • Automação •
+            Desenvolvimento • Dados • Educação Tecnológica
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section id="sobre">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Sobre mim</h2>
+          <p>Experiência profissional aliada à educação tecnológica.</p>
+        </div>
+
+        <div class="about">
+
+          <div class="about-card">
+            <h3>Minha atuação</h3>
+            <p>
+              Atuo na área de Tecnologia da Informação e Educação
+              Tecnológica, desenvolvendo aulas, projetos, atividades
+              práticas e soluções que aproximam os alunos dos desafios
+              encontrados no mercado de trabalho.
+            </p>
+          </div>
+
+          <div class="about-card">
+            <h3>Meu propósito</h3>
+            <p>
+              Compartilhar conhecimento, incentivar a aprendizagem
+              baseada em projetos e demonstrar como redes, sistemas,
+              programação, segurança, IoT e automação podem ser
+              utilizados para resolver problemas reais.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ÁREAS -->
+    <section id="areas">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Áreas de conhecimento</h2>
+          <p>Principais tecnologias e temas presentes no meu trabalho.</p>
+        </div>
+
+        <div class="cards">
+
+          <article class="card">
+            <div class="icon">🌐</div>
+            <h3>Redes de Computadores</h3>
+            <p>
+              Infraestrutura, TCP/IP, IPv4, IPv6, VLAN, DHCP,
+              DNS, roteamento, comutação e simuladores de redes.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🛡️</div>
+            <h3>Cibersegurança</h3>
+            <p>
+              Fundamentos de segurança da informação, identidade,
+              proteção de sistemas, políticas, redes e boas práticas.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">📡</div>
+            <h3>IoT e Automação</h3>
+            <p>
+              ESP32, ESP8266, sensores, displays, Wi-Fi, LoRa,
+              comunicação entre dispositivos e prototipagem.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">💻</div>
+            <h3>Programação</h3>
+            <p>
+              Python, HTML, CSS, JavaScript, Arduino e desenvolvimento
+              de aplicações voltadas para projetos educacionais.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🗄️</div>
+            <h3>Banco de Dados</h3>
+            <p>
+              MySQL, SQL Server, modelagem de dados, criação de tabelas,
+              consultas, importação e exportação de bancos.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">📊</div>
+            <h3>Dados e BI</h3>
+            <p>
+              Excel, Power Query, Power BI, DAX, análise de dados
+              e construção de dashboards.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJETOS -->
+    <section id="projetos">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Projetos e atividades</h2>
+          <p>
+            Um espaço para registrar projetos concluídos,
+            atividades em desenvolvimento e experiências de sala de aula.
+          </p>
+        </div>
+
+        <div class="cards">
+
+          <article class="card project-card">
+            <div class="icon">🌡️</div>
+            <h3>Controlador de Temperatura</h3>
+            <p>
+              Projeto educacional envolvendo levantamento de requisitos,
+              documentação, EAP, prototipagem e desenvolvimento de
+              uma solução para controle de temperatura.
+            </p>
+            <span class="tag">Automação</span>
+            <br>
+            <a href="#" class="project-link">Ver projeto →</a>
+          </article>
+
+          <article class="card project-card">
+            <div class="icon">📡</div>
+            <h3>Monitoramento com ESP32</h3>
+            <p>
+              Desenvolvimento de protótipos utilizando ESP32,
+              sensores, display, Wi-Fi, portal de configuração
+              e dashboard web.
+            </p>
+            <span class="tag">IoT</span>
+            <br>
+            <a href="#" class="project-link">Ver projeto →</a>
+          </article>
+
+          <article class="card project-card">
+            <div class="icon">🗃️</div>
+            <h3>MySQL Workbench</h3>
+            <p>
+              Atividades práticas de banco de dados envolvendo
+              criação de schemas, tabelas, relacionamento,
+              importação e exportação de dados.
+            </p>
+            <span class="tag">Banco de Dados</span>
+            <br>
+            <a href="#" class="project-link">Ver atividade →</a>
+          </article>
+
+          <article class="card project-card">
+            <div class="icon">🌐</div>
+            <h3>Infraestrutura de Redes</h3>
+            <p>
+              Projetos e atividades sobre infraestrutura física,
+              requisitos, simbologias, protocolos e interconexão
+              de redes de comunicação.
+            </p>
+            <span class="tag">Redes</span>
+            <br>
+            <a href="#" class="project-link">Ver atividade →</a>
+          </article>
+
+          <article class="card project-card">
+            <div class="icon">🔐</div>
+            <h3>Laboratório de Cibersegurança</h3>
+            <p>
+              Atividades práticas envolvendo redes, sistemas,
+              identidade, segurança da informação e ambientes
+              de laboratório.
+            </p>
+            <span class="tag">Cibersegurança</span>
+            <br>
+            <a href="#" class="project-link">Ver projeto →</a>
+          </article>
+
+          <article class="card project-card">
+            <div class="icon">🤖</div>
+            <h3>Inteligência Artificial</h3>
+            <p>
+              Atividades educacionais sobre Inteligência Artificial
+              Generativa, Google Cloud, Vertex AI Studio e aplicações
+              práticas de IA.
+            </p>
+            <span class="tag">IA Generativa</span>
+            <br>
+            <a href="#" class="project-link">Ver atividade →</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TRAJETÓRIA -->
+    <section id="trajetoria">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Minha trajetória</h2>
+          <p>Experiência profissional e evolução na área de tecnologia.</p>
+        </div>
+
+        <div class="timeline">
+
+          <div class="timeline-item">
+            <span>TECNOLOGIA DA INFORMAÇÃO</span>
+            <h3>Mais de 20 anos de experiência</h3>
+            <p>
+              Experiência em suporte, infraestrutura, gestão de conhecimento,
+              atendimento e processos de Tecnologia da Informação.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <span>EDUCAÇÃO</span>
+            <h3>Professor de Tecnologia</h3>
+            <p>
+              Desenvolvimento de aulas, projetos e atividades práticas
+              voltadas à formação profissional e tecnológica.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <span>PROJETOS</span>
+            <h3>Aprendizagem baseada em projetos</h3>
+            <p>
+              Criação de projetos envolvendo redes, IoT, automação,
+              bancos de dados, programação, dados e cibersegurança.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <span>ATUALMENTE</span>
+            <h3>Construindo novos projetos</h3>
+            <p>
+              Este portfólio será atualizado continuamente com novas
+              atividades, projetos desenvolvidos com alunos, materiais
+              didáticos e experimentos tecnológicos.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato">
+      <div class="container">
+
+        <div class="contact-box">
+          <h2>Vamos conectar ideias?</h2>
+
+          <p>
+            Este portfólio está em constante evolução.
+            Aqui serão publicados projetos, atividades, materiais,
+            experimentos e soluções desenvolvidas ao longo da minha
+            trajetória na Tecnologia e na Educação.
+          </p>
+
+          <div class="social">
+            <!-- ALTERE OS LINKS ABAIXO -->
+            <a href="https://github.com/" target="_blank">GitHub</a>
+            <a href="#" target="_blank">LinkedIn</a>
+            <a href="mailto:seuemail@email.com">E-mail</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 William Silva • Tecnologia, Educação e Inovação
+    </div>
+  </footer>
+
+</body>
+</html>
+'''
+
+path = Path("/mnt/data/index.html")
+path.write_text(html, encoding="utf-8")
+
+print(f"Arquivo criado: {path}")
