@@ -1,6 +1,4 @@
-from pathlib import Path
-
-html = r'''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -759,9 +757,8 @@ html = r'''<!DOCTYPE html>
 
           <div class="social">
             <!-- ALTERE OS LINKS ABAIXO -->
-            <a href="https://github.com/" target="_blank">GitHub</a>
-            <a href="#" target="_blank">LinkedIn</a>
-            <a href="mailto:seuemail@email.com">E-mail</a>
+            <a href="#" target="https://www.linkedin.com/in/williambelarmino/">LinkedIn</a>
+            <a href="profwilliam.silva.senai@gmail.com">E-mail</a>
           </div>
         </div>
 
@@ -778,9 +775,3 @@ html = r'''<!DOCTYPE html>
 
 </body>
 </html>
-'''
-
-path = Path("/mnt/data/index.html")
-path.write_text(html, encoding="utf-8")
-
-print(f"Arquivo criado: {path}")
